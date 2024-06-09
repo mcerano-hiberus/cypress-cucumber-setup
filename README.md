@@ -35,15 +35,15 @@
 
 ## Execute tests by TAGS
 
-> npx cypress run --env TAGS='@login'
+> npx cypress run --env TAGS='@saucedemo'
 
-> npx cypress open --env TAGS='@login'
+> npx cypress open --env TAGS='@saucedemo'
 
 
 ### Conditional tagging:
 
-> npx cypress run --env TAGS='@login and @smoke'
+> npx cypress run --env TAGS='@saucedemo and @smoke'
 
-> npx cypress run --env TAGS='@login or @is_it_friday'
+> npx cypress run --env TAGS='@saucedemo or @is_it_friday'
 
 > npx cypress run --env TAGS='not @is_it_friday'
