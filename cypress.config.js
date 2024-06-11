@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const preprocessor = require("@badeball/cypress-cucumber-preprocessor");
 const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild");
+const { allureCypress } = require("allure-cypress/reporter");
 
 
 async function setupNodeEvents(on, config) {
@@ -14,6 +15,10 @@ async function setupNodeEvents(on, config) {
       plugins: [createEsbuildPlugin.default(config)],
     })
   );
+  allureCypress(on, {
+    resultsDir: "./allure-results"
+  });
+  require('cypress-mochawesome-reporter/plugin')(on);
 
   // Make sure to return the config object as it might have been modified by the plugin.
   return config;
@@ -25,5 +30,13 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/features/**/*.feature",
     baseUrl: "https://www.saucedemo.com",
     chromeWebSecurity: false,
+  },
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'custom-title',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
   },
 });
